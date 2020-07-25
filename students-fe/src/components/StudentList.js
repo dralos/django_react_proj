@@ -11,6 +11,7 @@ class StudentList extends Component {
       <Table dark>
         <thead>
           <tr>
+            <th>Pk</th>
             <th>Name</th>
             <th>Email</th>
             <th>Document</th>
@@ -29,6 +30,7 @@ class StudentList extends Component {
           ) : (
             students.map(student => (
               <tr key={student.pk}>
+                <td>{student.pk}</td>
                 <td>{student.name}</td>
                 <td>{student.email}</td>
                 <td>{student.document}</td>

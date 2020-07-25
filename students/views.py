@@ -30,22 +30,24 @@ def students_list(request):
 @api_view(['PUT', 'DELETE'])
 def students_detail(request, pk):
     try:
+        print('hello world iam delete update')
+        print(pk)
         student = Student.objects.get(pk=pk)
+        print(student)
     except Student.DoesNotExist:
+        print('no student with pk:', pk, )
         return Response(status=status.HTTP_404_NOT_FOUND)
 
     if request.method == 'PUT':
         serializer = StudentSerializer(student, data=request.data,context={'request': request})
         if serializer.is_valid():
             serializer.save()
-            # print(request)
             return Response(status=status.HTTP_204_NO_CONTENT)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
     elif request.method == 'DELETE':
         student.delete()
         return Response(status=status.HTTP_204_NO_CONTENT)
-
 
 # function for sending SMS 
 def sendSMS(phone): 
